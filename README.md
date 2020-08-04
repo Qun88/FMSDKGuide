@@ -45,7 +45,7 @@ Fengmap JavaScript SDK是一套基于 WebGL 和 HTML5 技术的浏览器应用�
 
 1.登录蜂鸟云账号。
 
-![登录蜂鸟账号](\assets\Login.png)
+![登录蜂鸟账号](https://raw.githubusercontent.com/Qun88/FMSDKGuide/master/assets/Login.png)
 
 2.通过蜂鸟云 ->开发
 -> 创建应用，创建一个新应用。如果您之前已经创建过应用，跳过这个步骤。
