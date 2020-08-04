@@ -50,15 +50,15 @@ Fengmap JavaScript SDK是一套基于 WebGL 和 HTML5 技术的浏览器应用�
 2.通过蜂鸟云 ->开发
 -> 创建应用，创建一个新应用。如果您之前已经创建过应用，跳过这个步骤。
 
-![通过蜂鸟云](\assets\Fengmap.png)
+![通过蜂鸟云](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/Fengmap.png)
 
 3、在创建的应用上点击“添加key”按钮，在弹出的对话框中依次：输入key名称、选择SDK平台、输入白名单。如下图所示：
 
-![在创建的应用上点击添加key](\assets\AppKey.png)
+![在创建的应用上点击添加key](https://raw.githubusercontent.com/Qun88/FMSDKGuide/master/assets/AppKey.png)
 
 4、完成对话框填写并阅读同意蜂鸟云服务条款之后，点击确定即可完成密钥申请。如下图所示：
 
-![read2](\assets\Appnamekey.png)
+![read2](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/Appnamekey.png)
 
 ## 配置工程
 
@@ -73,7 +73,7 @@ Fengmap JavaScript SDK是一套基于 WebGL 和 HTML5 技术的浏览器应用�
 • 存储离线 Fengmap 数据文件夹data（可选文件，注：使用离线数据时候必须存在）。
 下图为一个 helloFengMap 的站点目录结构示例：
 
-![image](\assets\contents.png)
+![image](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/contents.png)
 
 ### 编写html页面代码
 
@@ -86,7 +86,7 @@ Fengmap JavaScript SDK是一套基于 WebGL 和 HTML5 技术的浏览器应用�
 注：地图数据格式为*.fmap文件类型。主题数据是包含*.theme配置文件和*.fmi公共设施图标的文件夹。
 如果站点发布到IIS或Tomcat时发生浏览错误，可以尝试设置站点的MIME类型解决。".fmap"的MIME类型为"application/octet-stream",".fmi"的MIME类型为"image/png",".theme"的MIME类型为"text/plain"。如下图所示：
 
-![image](\assets\dataform.png)
+![image](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/dataform.png)
 
 ## 开发建议
 
@@ -1479,3 +1479,24 @@ navi.on('walking', function(data) {
 ```
 
 ## 特效添加
+
+### 天空盒
+
+天空盒用于在场景中实现模拟真实天空效果，支持时间设定，模拟24小时场景中的模型变化，并支持场景时间与真实时间的比例设定
+
+```javascript
+ //初始化天空盒
+ skyEffect = new fengmap.FMSkyEffect(map);
+ //设定天空盒自动时间流动
+ skyEffect.enableAutoTime(true);
+ //
+ skyEffect.setTime();
+```
+
+### 光效
+
+### 粒子特效
+
+### 屏幕特效
+
+### 水波纹特效
