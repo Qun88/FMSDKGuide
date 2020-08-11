@@ -45,20 +45,20 @@ Fengmap JavaScript SDK是一套基于 WebGL 和 HTML5 技术的浏览器应用�
 
 1.登录蜂鸟云账号。
 
-![登录蜂鸟账号](\assets\Login.png)
+![登录蜂鸟账号](https://raw.githubusercontent.com/Qun88/FMSDKGuide/master/assets/Login.png)
 
 2.通过蜂鸟云 ->开发
 -> 创建应用，创建一个新应用。如果您之前已经创建过应用，跳过这个步骤。
 
-![通过蜂鸟云](\assets\Fengmap.png)
+![通过蜂鸟云](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/Fengmap.png)
 
 3、在创建的应用上点击“添加key”按钮，在弹出的对话框中依次：输入key名称、选择SDK平台、输入白名单。如下图所示：
 
-![在创建的应用上点击添加key](\assets\AppKey.png)
+![在创建的应用上点击添加key](https://raw.githubusercontent.com/Qun88/FMSDKGuide/master/assets/AppKey.png)
 
 4、完成对话框填写并阅读同意蜂鸟云服务条款之后，点击确定即可完成密钥申请。如下图所示：
 
-![read2](\assets\Appnamekey.png)
+![read2](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/Appnamekey.png)
 
 ## 配置工程
 
@@ -73,7 +73,7 @@ Fengmap JavaScript SDK是一套基于 WebGL 和 HTML5 技术的浏览器应用�
 • 存储离线 Fengmap 数据文件夹data（可选文件，注：使用离线数据时候必须存在）。
 下图为一个 helloFengMap 的站点目录结构示例：
 
-![image](\assets\contents.png)
+![image](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/contents.png)
 
 ### 编写html页面代码
 
@@ -86,7 +86,7 @@ Fengmap JavaScript SDK是一套基于 WebGL 和 HTML5 技术的浏览器应用�
 注：地图数据格式为*.fmap文件类型。主题数据是包含*.theme配置文件和*.fmi公共设施图标的文件夹。
 如果站点发布到IIS或Tomcat时发生浏览错误，可以尝试设置站点的MIME类型解决。".fmap"的MIME类型为"application/octet-stream",".fmi"的MIME类型为"image/png",".theme"的MIME类型为"text/plain"。如下图所示：
 
-![image](\assets\dataform.png)
+![image](https://raw.githubusercontent.com/Monky29/FMSDKGuide/master/assets/dataform.png)
 
 ## 开发建议
 
@@ -1449,7 +1449,7 @@ navi.stop();
 
 ### 真实导航
 
-在使用真实的定位系统时，如：WIFI定位，蓝牙定位等，就需要将定位系统所返回的定位坐标转化为fengmap地图坐标，这样就可以在fengmap地图中去根据真实的定位点去实时的改变地图中的Marker的位置。实现真实定位。示例如下：
+在使用真实的定位系统时，如：WIFI定位，蓝牙定位等，就需要将定位系统所返回的定位坐标转化为 Fengmap 地图坐标，这样就可以在fengmap地图中去根据真实的定位点去实时的改变地图中的Marker的位置。实现真实定位。示例如下：
 
 ```javascript
 // 先创建FMNavigation对象
@@ -1479,3 +1479,132 @@ navi.on('walking', function(data) {
 ```
 
 ## 特效添加
+
+### 天空盒
+
+Fengmap JavaScript SDK 提供创建天空盒用于在场景中实现模拟真实天空效果，支持时间设定，模拟24小时场景中的模型变化
+
+```javascript
+ //初始化天空盒
+ skyEffect = new fengmap.FMSkyEffect(map);
+ //天空盒配置设置
+    var options = {
+        scale: 500,     //天空效果大小比例,默认值为500
+        turbidity: 10,  //天空效果混乱度
+        rayleigh: 3,    //天空效果散射度
+        luminance: 1 //天空效果亮度
+    };
+ skyEffect.setAttribute(options);
+ //设定天空盒自动时间流动
+ skyEffect.enableAutoTime(true);
+ //设定天空和当前时间
+ skyEffect.setTime(21);
+```
+
+### 光效
+
+### 渲染器
+
+Fengmap JavaScript SDK 提供一种具有bloom发光、阴影、SAO等特效的渲染器。支持场景中模型设置相关光效设置。
+
+```javascript
+effectRender = map.getEffectRenderer();//初始化渲染器对象
+
+//发光参数设定
+effectRender.bloomPass.threshold = 0.5；//bloom发光阈值：0-1，值越小越亮，1为不发光
+effectRender.bloomPass.strength = 5; //bloom发光强度：值越大越亮
+effectRender.bloomPass.radius = 0.5; //bloom发光半径：建议取值范围：0-1
+effectRender.addBloomList(BloomLightLayer);//向bloom发光列表中添加对应需要发光的图层
+effectRender.enableBloom(true); //启用bloom发光效果
+
+//SAO参数设定
+effectRender.SAOIntensity = 0.00001 //设置SAO强度，范围0-1
+effectRender.SAOScale= 30;          //设置SAO等级
+effectRender.enableSAOBlur=true  ;  //是否启用SAO模糊
+effectRender.SAOBlurRadius=4  ;     //设置SAO模糊半径
+effectRender.SAOBlurStdDev=4 ;      //设置SAO模糊标准偏差
+effectRender.SAOBlurDepthCutoff=0.01  ; //设置SAO模糊深度
+effectRender.enenableSAO(true);//启用SAO效果
+
+//阴影参数设定
+effectRender.enableShadow(true);//设置阴影
+```
+
+### 流光效果
+
+Fengmap JavaScript SDK 支持场景中添加流光线FMFlowLineMarker 是一种具有流动颜色、可配和发光特效使用、可自定义线宽的线形标注
+
+```javascript
+//流光线参数
+options = {
+            center: map.center,//流光线中心点坐标
+            lineWidth: 3,      //流光线宽度
+            color: "#f38912",  //流光线发光颜色
+            points:pnts,       //流光线顶点坐标
+            backgroundColor: "#0000FF", //流光线背景颜色
+            opacity: 1.0,      //流光线透明度
+            lineLength: 0.3,   //流线流光的长度，以最小两顶点距离为单位长度
+            speed: 1           //流线流光速度，取值范围0-1
+            };
+flowLineMarker = new fengmap.FMFlowLineMarker(options);//初始化流光线
+flowLineLayer.addMarker(flowLineMarker);    //添加marker
+effectRender.addBloomList(flowLineLayer);   //将需要发光的图层添加到bloom发光列表
+```
+
+### 扫光效果
+
+Fengmap JavaScript SDK 支持场景中对于具备Standard材质的物体提供扫光效果，可按自定义矩形或环形进行扫光设置，并支持扫光速度设定
+
+```javascript
+    sweepEffect = new fengmap.FMSweepEffect(map);//初始化扫光渲染器
+    particleEffect.particleUrl = "texture/snow.png"; //设定粒子贴图
+    particleEffect.particleCount = 0.1; //粒子数目 值域0-1
+    particleEffect.enable(effectFlag);  //启用粒子效果
+```
+
+### 粒子特效
+
+Fengmap JavaScript SDK 提供向场景中添加粒子效果，支持粒子自定义等。用以实现场景内雨、雪等效果，示例如下：
+
+```javascript
+    particleEffect = new fengmap.FMParticleEffect(map);//初始化对象
+    particleEffect.particleUrl = "texture/snow.png"; //设定粒子贴图
+    particleEffect.particleCount = 0.1; //粒子数目 值域0-1
+    particleEffect.enable(effectFlag);  //启用粒子效果
+```
+
+### 屏幕特效
+
+Fengmap JavaScript SDK 提供基于屏幕后处理的效果，支持雨水等的屏幕效果，示例如下：
+
+```javascript
+rainEffect = new fengmap.FMScreenEffect(map);//初始化屏幕效果
+var option = {
+    url: "images/oip1.png",     //雨水贴图路径
+    raindrops: 1                //雨水大小程度，0-1内设置
+    }  
+rainEffect.initRain(option);        //初始化屏幕雨水效果
+rainEffect.enableRain(effectFlag);  //启用屏幕雨水效果
+```
+
+### 水波纹特效
+
+Fengmap JavaScript SDK 提供在场景中加入水波纹效果 FMWaterMarker 是一种具有动态水波纹、可更改颜色及透明度的任意形状的图形标注，示例如下：
+
+```javascript
+//水波纹配置参数
+var options = {
+    color: 0x12347F,                //水波纹颜色
+    alpha: 1,                       //水波纹透明度
+    height: 1,                      //水波纹距离所在楼层的高度
+    points: points,                 //水波纹的图形顶点设定水波纹范围
+    url: 'texture/waternormals.jpg' //水波纹的法线贴图路径
+};
+
+//初始化水纹对象
+waterMarker = new fengmap.FMWaterMarker(options);
+//添加marker
+waterLayer.addMarker(waterMarker);
+//设置水波纹距离当前层高度
+waterMarker.setHeight(-1);
+```
